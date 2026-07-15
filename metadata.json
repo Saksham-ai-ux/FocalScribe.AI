@@ -1,0 +1,6 @@
+{
+  "name": "FocalScribe",
+  "description": "AI-powered short-form scriptwriter and scrolling teleprompter for video creators, designed to write scroll-stopping hooks and deliver flawless recordings with perfect camera eye contact.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

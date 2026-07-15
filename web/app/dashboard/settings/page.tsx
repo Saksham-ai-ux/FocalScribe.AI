@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { 
   Settings, 
   User, 
@@ -34,6 +34,29 @@ function SettingsContent() {
   const [profileEmail, setProfileEmail] = useState(user?.email || "saksham@focalscribe.com");
   const [isSaved, setIsSaved] = useState(false);
 
+  const [configStatus, setConfigStatus] = useState({
+    groqConfigured: false,
+    razorpayConfigured: false
+  });
+
+  useEffect(() => {
+    async function fetchConfig() {
+      try {
+        const res = await fetch("/api/ai");
+        const data = await res.json();
+        if (data.success) {
+          setConfigStatus({
+            groqConfigured: data.groqConfigured,
+            razorpayConfigured: data.razorpayConfigured
+          });
+        }
+      } catch (err) {
+        console.error("Failed to fetch key configuration status:", err);
+      }
+    }
+    fetchConfig();
+  }, []);
+
   const keyStatus = [
     {
       name: "Supabase Authentication & DB",
@@ -44,13 +67,13 @@ function SettingsContent() {
     {
       name: "Groq AI (Llama-3)",
       desc: "Required to compile viral hooks, video scripts, and SEO metadata.",
-      configured: process.env.GROQ_API_KEY !== undefined && process.env.GROQ_API_KEY !== "MY_GROQ_API_KEY",
+      configured: configStatus.groqConfigured,
       icon: <Cpu className="w-5 h-5 text-primary" />
     },
     {
       name: "Razorpay Checkout Gateway",
       desc: "Manages pricing checkouts, recurring billing periods, and transaction signatures.",
-      configured: process.env.RAZORPAY_KEY_ID !== undefined && process.env.RAZORPAY_KEY_ID !== "rzp_test_placeholder_key_id",
+      configured: configStatus.razorpayConfigured,
       icon: <CreditCard className="w-5 h-5 text-primary" />
     }
   ];

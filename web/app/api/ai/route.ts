@@ -1,5 +1,23 @@
 import { NextResponse } from "next/server";
 
+export async function GET() {
+  try {
+    const groqKey = process.env.GROQ_API_KEY;
+    const razorpayKey = process.env.RAZORPAY_KEY_ID;
+    
+    return NextResponse.json({
+      success: true,
+      groqConfigured: !!groqKey && groqKey !== "MY_GROQ_API_KEY",
+      razorpayConfigured: !!razorpayKey && razorpayKey !== "rzp_test_placeholder_key_id"
+    });
+  } catch (error: any) {
+    return NextResponse.json({
+      success: false,
+      error: error.message
+    });
+  }
+}
+
 export async function POST(req: Request) {
   try {
     const body = await req.json();

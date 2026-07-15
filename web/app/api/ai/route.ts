@@ -43,7 +43,7 @@ export async function POST(req: Request) {
         Authorization: `Bearer ${apiKey}`
       },
       body: JSON.stringify({
-        model: "llama-3.3-70b-specdec", // high-performance default Groq model
+        model: "llama-3.3-70b-versatile", // high-performance default Groq model
         messages: [
           { role: "system", content: systemPrompt },
           { role: "user", content: userPrompt }
@@ -65,8 +65,11 @@ export async function POST(req: Request) {
     }
 
     const groqData = await response.json();
+    console.log("Incoming Groq API raw response:", JSON.stringify(groqData));
     const resultText = groqData.choices[0]?.message?.content;
+    console.log("Groq API raw response text content:", resultText);
     const parsedData = JSON.parse(resultText);
+    console.log("Groq API parsed data:", parsedData);
 
     return NextResponse.json({
       success: true,

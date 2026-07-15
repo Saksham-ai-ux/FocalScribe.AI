@@ -29,6 +29,8 @@ function ScriptContent() {
   const router = useRouter();
   const { currentScript, saveScript, incrementUsage, user, setCurrentScript } = useApp();
 
+  console.log("[TEMPORARY LOG] Final state before rendering (currentScript):", currentScript);
+
   const [topic, setTopic] = useState("");
   const [platform, setPlatform] = useState("TikTok");
   const [tone, setTone] = useState("High Energy");
@@ -75,6 +77,7 @@ function ScriptContent() {
       });
 
       const result = await response.json();
+      console.log("[TEMPORARY LOG] Incoming API response (generate_script):", result);
       if (result.success && result.data) {
         const { hook, body, call_to_action, estimated_duration_seconds } = result.data;
         
@@ -116,6 +119,7 @@ function ScriptContent() {
       });
 
       const result = await response.json();
+      console.log("[TEMPORARY LOG] Incoming API response (shift_tone):", result);
       if (result.success && result.data) {
         const { hook, body, call_to_action, estimated_duration_seconds } = result.data;
         const full_text = `${hook}\n\n${body}\n\n${call_to_action}`;

@@ -14,7 +14,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
+      <body className="bg-background text-white antialiased">
         {/* Razorpay SDK */}
         <Script
           src="https://checkout.razorpay.com/v1/checkout.js"
@@ -44,8 +44,6 @@ export default function RootLayout({
             posthog.init('phc_PLACEHOLDER', {api_host: 'https://us.i.posthog.com'});
           `}
         </Script>
-      </head>
-      <body className="bg-background text-white antialiased">
         {children}
       </body>
     </html>

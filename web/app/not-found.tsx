@@ -1,7 +1,4 @@
-"use client";
-
 import React from "react";
-import Link from "next/link";
 import { Sparkles } from "lucide-react";
 
 export default function NotFound() {
@@ -18,9 +15,9 @@ export default function NotFound() {
         The creator workspace or page you are trying to access does not exist or has been relocated.
       </p>
       
-      <Link href="/" className="px-6 py-3 rounded-xl bg-cyan-400 text-black font-extrabold text-sm hover:shadow-[0_0_15px_rgba(0,240,255,0.5)] hover:scale-[1.02] transition-all">
+      <a href="/" className="px-6 py-3 rounded-xl bg-cyan-400 text-black font-extrabold text-sm hover:shadow-[0_0_15px_rgba(0,240,255,0.5)] hover:scale-[1.02] transition-all">
         Go Back Home
-      </Link>
+      </a>
     </div>
   );
 }
